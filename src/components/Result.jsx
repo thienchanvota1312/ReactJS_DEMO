@@ -2,7 +2,7 @@ import React from 'react'
 
 function Result({ result, openPopup }) {
 	return (
-		<div className="MovieListContainer" onClick={() => openPopup(result.imdbID)}>
+		<div className="MovieContainer" onClick={() => openPopup(result.imdbID)}>
 			<img src={result.Poster} alt={result.Title} />
 		</div>
 	)

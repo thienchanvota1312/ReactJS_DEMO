@@ -83,6 +83,7 @@ img {
 
 .pagination {
   list-style: none;
+  cursor: pointer;
 }
 
 .pagination li {
@@ -157,7 +158,6 @@ img {
 }
 
 .popup {
-  
   position: fixed;
   top: 0;
   left: 0;
