@@ -1,42 +1,70 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import Movie from "./Movie"; 
-import Detail from "./Detail"; 
-import Pagination from "./Pagination"; 
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-
-import { API_KEY } from "./Home";
+import Search from './Search'
+import Results from './Results'
+import Detail from './Detail'
+import Pagination from "./Pagination"
+import NavBar from './NavBar'
 
 
 function Movies() {
+  const [state, setState] = useState({
+    s: "",
+    results: [],
+    selected: {}
+  });
+  const apiurl = "http://www.omdbapi.com/?apikey=6f5e44e9";
 
-  const [searchQuery, updateSearchQuery] = useState("");
-
-  const [movieList, updateMovieList] = useState([]);
-  const [selectedMovie, onMovieSelect] = useState();
-
-  const [timeoutId, updateTimeoutId] = useState();
   const moviesPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const search = (e) => {
+    if (e.key === "Enter") {
+      axios(apiurl + "&s=" + state.s + "&type=movie").then(({ data }) => {
+        let results = data.Search;
 
-  const fetchData = async (searchString) => {
-    const response = await Axios.get(
-      `https://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY}&type=movie`,
-    );
-    updateMovieList(response.data.Search);
-  };
+        setState(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
+    }
+  }
+
+
   useEffect(()=>{
-    fetchData("superman")
-  },[])
+    axios(apiurl + "&s=" + "superman" + "&type=movie").then(({ data }) => {
+        let results = data.Search;
 
-  const onTextChange = (e) => {
-    onMovieSelect("")
-    clearTimeout(timeoutId);
-    updateSearchQuery(e.target.value);
-    const timeout = setTimeout(() => fetchData(e.target.value), 500);
-    updateTimeoutId(timeout);
-  };
+        setState(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
+  },[])
+  
+  const handleInput = (e) => {
+    let s = e.target.value;
+
+    setState(prevState => {
+      return { ...prevState, s: s }
+    });
+  }
+
+  const openPopup = id => {
+    axios(apiurl + "&i=" + id).then(({ data }) => {
+      let result = data;
+
+      setState(prevState => {
+        return { ...prevState, selected: result }
+      });
+    });
+  }
+
+  const closePopup = () => {
+    setState(prevState => {
+      return { ...prevState, selected: {} }
+    });
+  }
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -44,46 +72,28 @@ function Movies() {
 
   const indexOfLastMovie = currentPage*moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovie = movieList ?.slice(indexOfFirstMovie, indexOfLastMovie);
-
+  const currentMovie = state.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
   return (
-    <React.Fragment>
     <div className = "Container">
         <div className = "AppName">
         <h1>DongPhym.Com</h1>
         </div>
-        <div className="SearchBox">
-          <input
-            placeholder="Search Movie ..."
-            value={searchQuery}
-            onChange={onTextChange}
-          />
+        <div className="nav">
+          <NavBar/>
+          <Search handleInput={handleInput} search={search} />
         </div>
-      {selectedMovie && <Detail selectedMovie={selectedMovie} onMovieSelect={onMovieSelect}/>} 
-      < div className="MovieListContainer">
-        {movieList ?.length ? (
-          currentMovie.map((movie, index) => (
-            <Movie
-              key={index}
-              movie={movie}
-              onMovieSelect={onMovieSelect}
-            />
-          ))
-        ) : (
-            'No film found...'
-        )}
-      </div>
-      <div className="pagination">  
-      <Pagination 
+        < div className="MovieListContainer">
+        <Results results={currentMovie} openPopup={openPopup} />
+        </div>
+        {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}
+        <Pagination 
         moviesPerPage={moviesPerPage} 
-        totalMovies={movieList ?.length} 
+        totalMovies={state.results.length} 
         onPageChange={handlePageChange}
-      />
+        />
       </div>
-    </div>
-    </React.Fragment>
   );
 }
 
-export default Movies;
+export default Movies
