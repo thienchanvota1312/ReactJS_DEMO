@@ -14,14 +14,13 @@ function Series() {
     results: [],
     selected: {}
   });
-  const apiurl = "http://www.omdbapi.com/?apikey=6f5e44e9";
 
   const moviesPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(apiurl + "&s=" + state.s + "&type=series").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -33,7 +32,7 @@ function Series() {
 
 
   useEffect(()=>{
-    axios(apiurl + "&s=" + "dragon" + "&type=series").then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&s=dragon" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -51,7 +50,7 @@ function Series() {
   }
 
   const openPopup = id => {
-    axios(apiurl + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
@@ -75,6 +74,7 @@ function Series() {
   const currentMovie = state.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
   return (
+    < div className="MovieListContainer">
     <div className = "Container">
         <div className = "AppName">
         <h1>DongPhym.Com</h1>
@@ -83,9 +83,7 @@ function Series() {
           <NavBar/>
           <Search handleInput={handleInput} search={search} />
         </div>
-        < div className="MovieListContainer">
         <Results results={currentMovie} openPopup={openPopup} />
-        </div>
         {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}
         <Pagination 
         moviesPerPage={moviesPerPage} 
@@ -93,6 +91,7 @@ function Series() {
         onPageChange={handlePageChange}
         />
       </div>
+    </div>
   );
 }
 

@@ -14,14 +14,14 @@ function Home() {
     results: [],
     selected: {}
   });
-  const apiurl = "http://www.omdbapi.com/?apikey=6f5e44e9";
 
   const moviesPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(apiurl + "&s=" + state.s).then(({ data }) => {
+      const url = 
+      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -33,7 +33,7 @@ function Home() {
 
 
   useEffect(()=>{
-    axios(apiurl + "&s=" + "super").then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&s=super" + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -51,7 +51,7 @@ function Home() {
   }
 
   const openPopup = id => {
-    axios(apiurl + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&i=" + id + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
@@ -75,6 +75,7 @@ function Home() {
   const currentMovie = state.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
   return (
+    < div className="MovieListContainer">
     <div className = "Container">
         <div className = "AppName">
         <h1>DongPhym.Com</h1>
@@ -83,9 +84,7 @@ function Home() {
           <NavBar/>
           <Search handleInput={handleInput} search={search} />
         </div>
-        < div className="MovieListContainer">
         <Results results={currentMovie} openPopup={openPopup} />
-        </div>
         {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}
         <Pagination 
         moviesPerPage={moviesPerPage} 
@@ -93,6 +92,7 @@ function Home() {
         onPageChange={handlePageChange}
         />
       </div>
+    </div>
   );
 }
 

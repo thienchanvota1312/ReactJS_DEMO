@@ -14,14 +14,13 @@ function Esipode() {
     results: [],
     selected: {}
   });
-  const apiurl = "http://www.omdbapi.com/?apikey=6f5e44e9";
 
   const moviesPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(apiurl + "&s=" + state.s + "&type=esipode").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=esipode").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -41,7 +40,7 @@ function Esipode() {
   }
 
   const openPopup = id => {
-    axios(apiurl + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
@@ -65,6 +64,7 @@ function Esipode() {
   const currentMovie = state.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
   return (
+    < div className="MovieListContainer">
     <div className = "Container">
         <div className = "AppName">
         <h1>DongPhym.Com</h1>
@@ -73,8 +73,12 @@ function Esipode() {
           <NavBar/>
           <Search handleInput={handleInput} search={search} />
         </div>
-        < div className="MovieListContainer">
-        <Results results={currentMovie} openPopup={openPopup} />
+        <div className='film'>
+        {state.results?.length ? (
+           <Results results={currentMovie} openPopup={openPopup} />
+        ) : (
+            'No film found...'
+        )}
         </div>
         {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}
         <Pagination 
@@ -83,6 +87,7 @@ function Esipode() {
         onPageChange={handlePageChange}
         />
       </div>
+    </div>
   );
 }
 
