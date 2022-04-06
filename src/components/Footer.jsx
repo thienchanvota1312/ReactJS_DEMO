@@ -41,7 +41,10 @@ function Footer() {
   	 			</div>
                 </ul>
   	 	    </div>
-        </div>       
+        </div>
+          <p>
+            &copy;{new Date().getFullYear()} Copyright ThiPD1 | All rights reserved 
+          </p>     
   	 </div>
     </footer>
   );
