@@ -20,7 +20,7 @@ function Series() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios("https://www.omdbapi.com/?s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -32,7 +32,7 @@ function Series() {
 
 
   useEffect(()=>{
-    axios("https://www.omdbapi.com/?s=dragon" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "s=dragon" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=series").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -50,7 +50,7 @@ function Series() {
   }
 
   const openPopup = id => {
-    axios("https://www.omdbapi.com/?apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
       let result = data;
 
       setState(prevState => {

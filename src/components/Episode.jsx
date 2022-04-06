@@ -20,7 +20,7 @@ function Esipode() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios("https://www.omdbapi.com/?s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -31,7 +31,7 @@ function Esipode() {
   }
 
   useEffect(()=>{
-    axios("https://www.omdbapi.com/?s=game" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "s=game" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -49,7 +49,7 @@ function Esipode() {
   }
 
   const openPopup = id => {
-    axios("https://www.omdbapi.com/?apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
