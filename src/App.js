@@ -12,7 +12,7 @@ function App() {
     <div className="App"> 
     <div className = "Header">
         <h1>DongPhym.Com</h1>
-        </div>
+    </div>
     <Switch>
     <Route path="/home" component={Home} />
     <Route path="/movie" component={Movies} />

@@ -8,7 +8,7 @@ function Footer() {
   	 	<div className="row">
   	 		<div className="col">
   	 			<ul>
-                    <h3>Introduce</h3>
+                    <a href="home"><h3>Home</h3></a>
   	 				<li><a href="#">about us</a></li>
   	 				<li><a href="#">contact</a></li>
   	 				<li><a href="#">copy right</a></li>
@@ -38,7 +38,6 @@ function Footer() {
   	 				<a href="#"><i className="fa fa-facebook"></i></a>
   	 				<a href="#"><i className="fa fa-twitter"></i></a>
   	 				<a href="#"><i className="fa fa-instagram"></i></a>
-  	 				<a href="#"><i className="fa fa-linkedin"></i></a>
   	 			</div>
                 </ul>
   	 	    </div>
