@@ -13,6 +13,7 @@ function App() {
     <div className = "Header">
         <h1>DongPhym.Com</h1>
     </div>
+    <hr/>
     <Switch>
     <Route path="/home" component={Home} />
     <Route path="/movie" component={Movies} />
