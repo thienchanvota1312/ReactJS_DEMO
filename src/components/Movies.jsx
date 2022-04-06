@@ -20,7 +20,7 @@ function Movies() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=movie").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=movie").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -32,7 +32,7 @@ function Movies() {
 
 
   useEffect(()=>{
-    axios(process.env.REACT_APP_URL_ENDPOINT + "&s=superman" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=movie").then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "s=superman" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=movie").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -50,7 +50,7 @@ function Movies() {
   }
 
   const openPopup = id => {
-    axios(process.env.REACT_APP_URL_ENDPOINT + "&apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "apikey=" + process.env.REACT_APP_API_KEY + "&i=" + id).then(({ data }) => {
       let result = data;
 
       setState(prevState => {

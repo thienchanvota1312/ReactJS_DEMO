@@ -21,7 +21,7 @@ function Home() {
   const search = (e) => {
     if (e.key === "Enter") {
       const url = 
-      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -33,7 +33,7 @@ function Home() {
 
 
   useEffect(()=>{
-    axios(process.env.REACT_APP_URL_ENDPOINT + "&s=super" + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "s=super" + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -51,7 +51,7 @@ function Home() {
   }
 
   const openPopup = id => {
-    axios(process.env.REACT_APP_URL_ENDPOINT + "&i=" + id + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
+    axios(process.env.REACT_APP_URL_ENDPOINT + "i=" + id + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
       let result = data;
 
       setState(prevState => {
