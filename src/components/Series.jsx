@@ -76,9 +76,6 @@ function Series() {
   return (
     < div className="MovieListContainer">
     <div className = "Container">
-        <div className = "AppName">
-        <h1>DongPhym.Com</h1>
-        </div>
         <div className="nav">
           <NavBar/>
           <Search handleInput={handleInput} search={search} />

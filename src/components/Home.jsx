@@ -77,12 +77,11 @@ function Home() {
   return (
     < div className="MovieListContainer">
     <div className = "Container">
-        <div className = "AppName">
-        <h1>DongPhym.Com</h1>
-        </div>
         <div className="nav">
-          <NavBar/>
-          <Search handleInput={handleInput} search={search} />
+          <div className='nav-col'><NavBar/></div>
+          <div className='nav-col'><Search handleInput={handleInput} search={search} /></div>
+          
+          
         </div>
         <Results results={currentMovie} openPopup={openPopup} />
         {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}

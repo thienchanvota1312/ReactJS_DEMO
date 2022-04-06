@@ -18,7 +18,7 @@ code {
   flex-direction: column;
 }
 
-.AppName {
+.Header {
   text-align: center;
   color: aliceblue;
   margin-bottom: 20px;
@@ -27,22 +27,13 @@ code {
 .nav {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: #0b1014;
   margin-bottom: 50px;
 }
+
 .film {
   text-align: center;
-}
-
-input {
-  color: black;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  border-radius: 6px;
-  width: 50%;
-  margin-left: 15px;
-  padding: 8px 16px;
 }
 
 .MovieListContainer {
@@ -142,8 +133,9 @@ img {
 
 .searchbox {
   display: block;
-  width: 100%;
+  width: 85%;
   padding: 15px;
+  margin-left: 40px;
 
   border: none;
   outline: none;
@@ -160,7 +152,7 @@ img {
 }
 
 .searchbox:focus {
-  box-shadow: 0px 0px 8px 3px #4484C4;
+  box-shadow: 0px 0px 2px 2px #4484C4;
 }
 
 .popup {
@@ -234,4 +226,67 @@ img {
 
 .close:hover {
   background: #223343;
+}
+
+.container {
+  max-width: 1170px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+h3 {
+  color: white;
+}
+
+.col ul {
+  list-style: none;
+}
+
+.col {
+  width: 20%;
+  flex-basis: 25%;
+}
+
+.col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+.col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
 }

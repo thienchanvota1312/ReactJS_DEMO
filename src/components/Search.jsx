@@ -1,9 +1,8 @@
-
-import React from 'react'
+import React from 'react';
 
 function Search ({ handleInput, search }) {
 	return (
-		<section className="searchbox-wrap">
+		<section>
 			<input 
 				type="text" 
 				placeholder="Search for a movie..." 
