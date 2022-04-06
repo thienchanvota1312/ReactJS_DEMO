@@ -20,7 +20,7 @@ function Esipode() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=esipode").then(({ data }) => {
+      axios(process.env.REACT_APP_URL_ENDPOINT + "&s=" + state.s + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
@@ -30,6 +30,15 @@ function Esipode() {
     }
   }
 
+  useEffect(()=>{
+    axios(process.env.REACT_APP_URL_ENDPOINT + "&s=game" + "&apikey=" + process.env.REACT_APP_API_KEY + "&type=game").then(({ data }) => {
+        let results = data.Search;
+
+        setState(prevState => {
+          return { ...prevState, results: results }
+        })
+      });
+  },[])
 
   const handleInput = (e) => {
     let s = e.target.value;
@@ -73,13 +82,7 @@ function Esipode() {
           <NavBar/>
           <Search handleInput={handleInput} search={search} />
         </div>
-        <div className='film'>
-        {state.results?.length ? (
-           <Results results={currentMovie} openPopup={openPopup} />
-        ) : (
-            'No film found...'
-        )}
-        </div>
+        <Results results={currentMovie} openPopup={openPopup} />
         {(typeof state.selected.Title != "undefined") ? <Detail selected={state.selected} closePopup={closePopup} /> : false}
         <Pagination 
         moviesPerPage={moviesPerPage} 
