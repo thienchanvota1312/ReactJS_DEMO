@@ -8,7 +8,7 @@ function Footer() {
   	 	<div className="row">
   	 		<div className="col">
   	 			<ul>
-                    <a href="home"><h3>Home</h3></a>
+                    <li><a href="home"><h3>Home</h3></a></li>
   	 				<li><a href="#">about us</a></li>
   	 				<li><a href="#">contact</a></li>
   	 				<li><a href="#">copy right</a></li>
