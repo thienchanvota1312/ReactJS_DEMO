@@ -29,7 +29,7 @@ function Footer() {
                     <h3>{TYPE}</h3>
   	 				<li><a href="movie">movie</a></li>
   	 				<li><a href="series">series</a></li>
-  	 				<li><a href="game">game</a></li>
+  	 				<li><a href="episode">game</a></li>
   	 			</ul>
   	 		</div>
   	 		<div className="col">
