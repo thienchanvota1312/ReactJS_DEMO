@@ -33,7 +33,7 @@ function Home() {
 
 
   useEffect(()=>{
-    axios(process.env.REACT_APP_URL_ENDPOINT + "s=super" + "&apikey=" + process.env.REACT_APP_API_KEY).then(({ data }) => {
+    axios('https://www.omdbapi.com/?s=super&apikey=6f5e44e9').then(({ data }) => {
         let results = data.Search;
 
         setState(prevState => {
